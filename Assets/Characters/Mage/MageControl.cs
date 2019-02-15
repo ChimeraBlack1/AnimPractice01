@@ -41,10 +41,7 @@ public class MageControl : MonoBehaviour {
         var rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
 
         // if right mouse button held, rotation is controlled by mouse x
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            rotation = Input.GetAxis("Mouse X") * MouserotSpeed * Time.deltaTime;
-        }
+
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -85,8 +82,19 @@ public class MageControl : MonoBehaviour {
             anim.SetBool("isRunning", false);
         }
 
+
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        }
+        else
+        {
+            transform.Rotate(0, rotation, 0);
+        }
+
+
         transform.Translate(0, 0, translation);
-        transform.Rotate(0, rotation, 0);
     }
 
 }

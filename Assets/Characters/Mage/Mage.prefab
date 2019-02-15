@@ -876,7 +876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4672760971367596}
   - component: {fileID: 95605750857870450}
-  - component: {fileID: 114650192858677246}
+  - component: {fileID: 114377157984698202}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -1975,7 +1975,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114650192858677246
+--- !u!114 &114377157984698202
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

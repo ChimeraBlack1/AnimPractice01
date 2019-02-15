@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Damaging
+  - Ground
+  - Camera
   - 
   - 
   - 
