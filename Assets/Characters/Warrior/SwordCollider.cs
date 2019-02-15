@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SwordCollider : MonoBehaviour {
 
-    public GameObject Self;
-    public GameObject PlayerSword;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    print("hit " + other);
+    //    
+    //}
 
-    private void Update()
-    {
-        Physics.IgnoreCollision(Self.GetComponent<Collider>(), PlayerSword.GetComponent<Collider>());
-    }
+    public float sphereRadius = 100f;
 
     private void OnTriggerEnter(Collider other)
     {
-        print("hit " + other);
-        //other.TakeDamage();
+        // Play a noise if an object is within the sphere's radius.
+        if (Physics.CheckSphere(other.transform.position, sphereRadius))
+        {
+            print("hit" + other);
+            print(other.transform.position);
+        }
     }
 
 }

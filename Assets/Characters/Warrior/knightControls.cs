@@ -15,6 +15,8 @@ public class knightControls : MonoBehaviour
     public float MouserotSpeed = 2000f;
     public float rotSpeed = 20f;
     public float jumpHeight;
+    public float sphereRadius = 10f;
+    int ignoreEnemy = 1 << 13;
 
     Rigidbody rb;
     Animator anim;
@@ -50,6 +52,18 @@ public class knightControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             anim.SetTrigger("Cleave");
+
+            Collider[] hits = Physics.OverlapSphere(transform.position, 7);
+
+            foreach (Collider hit in hits)
+            {
+
+                if (hit.tag == "Enemy")
+                {
+                    print("hit " + hit.gameObject);
+                    // todo insert logic for reducing hitpoints of enemy
+                }
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -92,25 +106,3 @@ public class knightControls : MonoBehaviour
 
 
 }
-
-
-//float translation = Input.GetAxis("Mouse Y") * speed;
-//float rotation = Input.GetAxis("Mouse X") * rotSpeed;
-
-//print(rotation);
-
-//translation *= Time.deltaTime;
-//        rotation *= Time.deltaTime;
-//        transform.Translate(0,0,translation);
-//        transform.Rotate(0, rotation, 0);
-
-//        if(Input.GetKey(KeyCode.Mouse0) && Input.GetKey(KeyCode.Mouse1))
-//        {
-//            transform.Translate(Vector3.forward* Time.deltaTime* speed);
-//        }
-
-
-//        if (Input.GetButtonDown("Jump"))
-//        {
-//            anim.SetTrigger("isJumping");
-//        }
