@@ -15,9 +15,11 @@ public class knightControls : MonoBehaviour
     public float MouserotSpeed = 2000f;
     public float rotSpeed = 20f;
     public float jumpHeight;
-    public float sphereRadius = 10f;
+    public float sphereRadius = 5f;
     private float timeBtwAttack;
+    private float timeBtwAttack4;
     public float startTimeBtwAttack;
+    public float startTimeBtwAttack4;
 
     // Layer masks
     int ignoreEnemy = 1 << 13;
@@ -34,6 +36,12 @@ public class knightControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         col_size = GetComponent<CapsuleCollider>();
         isGrounded = true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, sphereRadius);
     }
 
     // Update is called once per frame
@@ -63,7 +71,7 @@ public class knightControls : MonoBehaviour
                 timeBtwAttack = startTimeBtwAttack;
                 anim.SetTrigger("Cleave");
 
-                Collider[] hits = Physics.OverlapSphere(transform.position, 7);
+                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
 
                 foreach (Collider hit in hits)
                 {
@@ -93,6 +101,34 @@ public class knightControls : MonoBehaviour
             anim.SetTrigger("Sprint");
         }
 
+
+        if (timeBtwAttack4 <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+
+                timeBtwAttack4 = startTimeBtwAttack4;
+                anim.SetTrigger("Whirlwind");
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+                foreach (Collider hit in hits)
+                {
+
+                    if (hit.tag == "Enemy")
+                    {
+                        print("hit " + hit.gameObject);
+                        // todo insert logic for reducing hitpoints of enemy
+                    }
+                }
+
+            }
+        }else
+        {
+            timeBtwAttack4 -= Time.deltaTime;
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             anim.SetTrigger("Whirlwind");
@@ -119,6 +155,7 @@ public class knightControls : MonoBehaviour
 
         transform.Translate(0, 0, translation);
     }
+
 
 
 }
