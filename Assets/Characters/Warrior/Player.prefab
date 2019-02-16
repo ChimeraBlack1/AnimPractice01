@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 95822844777919738}
   - component: {fileID: 54906888481186654}
   - component: {fileID: 136102229068834616}
-  - component: {fileID: 114330834689335670}
+  - component: {fileID: 114033752159999874}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2181,7 +2181,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114330834689335670
+--- !u!114 &114033752159999874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2202,6 +2202,7 @@ MonoBehaviour:
   rotSpeed: 20
   jumpHeight: 0
   sphereRadius: 10
+  startTimeBtwAttack: 1
 --- !u!136 &136102229068834616
 CapsuleCollider:
   m_ObjectHideFlags: 1

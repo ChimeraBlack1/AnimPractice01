@@ -16,7 +16,12 @@ public class knightControls : MonoBehaviour
     public float rotSpeed = 20f;
     public float jumpHeight;
     public float sphereRadius = 10f;
+    private float timeBtwAttack;
+    public float startTimeBtwAttack;
+
+    // Layer masks
     int ignoreEnemy = 1 << 13;
+
 
     Rigidbody rb;
     Animator anim;
@@ -49,22 +54,33 @@ public class knightControls : MonoBehaviour
             rotation = Input.GetAxis("Mouse X") * MouserotSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if(timeBtwAttack <= 0)
         {
-            anim.SetTrigger("Cleave");
-
-            Collider[] hits = Physics.OverlapSphere(transform.position, 7);
-
-            foreach (Collider hit in hits)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
 
-                if (hit.tag == "Enemy")
+                timeBtwAttack = startTimeBtwAttack;
+                anim.SetTrigger("Cleave");
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, 7);
+
+                foreach (Collider hit in hits)
                 {
-                    print("hit " + hit.gameObject);
-                    // todo insert logic for reducing hitpoints of enemy
+
+                    if (hit.tag == "Enemy")
+                    {
+                        print("hit " + hit.gameObject);
+                        // todo insert logic for reducing hitpoints of enemy
+                    }
                 }
+
             }
+        }else
+        {
+            timeBtwAttack -= Time.deltaTime;
         }
+       
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
