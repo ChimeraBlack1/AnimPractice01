@@ -52,7 +52,7 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 10
@@ -465,6 +465,6 @@ MonoBehaviour:
   MouserotSpeed: 2000
   rotSpeed: 20
   jumpHeight: 0
-  sphereRadius: 5
+  sphereRadius: 2
   startTimeBtwAttack: 0
   startTimeBtwAttack4: 0

@@ -147,6 +147,19 @@ public class knightControls : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
         {
             transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+
+            if(Input.GetKey(KeyCode.A))
+            {
+               // LEFT STRAFE
+                transform.position += Vector3.left * w_speed * Time.deltaTime;
+            }
+
+            // RIGHT STRAFE
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.position += Vector3.right * w_speed * Time.deltaTime;
+            }
+
         }
         else
         {
@@ -159,3 +172,8 @@ public class knightControls : MonoBehaviour
 
 
 }
+
+
+
+
+
