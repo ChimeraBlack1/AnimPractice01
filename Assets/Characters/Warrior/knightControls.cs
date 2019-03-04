@@ -8,22 +8,23 @@ public class knightControls : MonoBehaviour
     public bool isGrounded;
     public bool isCrouching;
 
-    public float speed;
+    public float speed = 0.1f;
     public float w_speed = 10f;
-    public float r_speed = 20f;
-    public float c_speed = 0.25f;
-    public float MouserotSpeed = 2000f;
-    public float rotSpeed = 20f;
     public float jumpHeight;
     public float sphereRadius = 5f;
     private float timeBtwAttack;
     private float timeBtwAttack4;
+    private float x;
+    private float z;
     public float startTimeBtwAttack;
     public float startTimeBtwAttack4;
+    
 
     // Layer masks
     int ignoreEnemy = 1 << 13;
 
+    private Vector3 moveDirection = Vector3.zero;
+    private CharacterController controller;
 
     Rigidbody rb;
     Animator anim;
@@ -53,14 +54,7 @@ public class knightControls : MonoBehaviour
             anim.SetTrigger("isJumping");
         }
 
-        var translation = Input.GetAxis("Vertical") * w_speed * Time.deltaTime;
-        var rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
-
-        // if right mouse button held, rotation is controlled by mouse x
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            rotation = Input.GetAxis("Mouse X") * MouserotSpeed * Time.deltaTime;
-        }
+        
 
 
         if(timeBtwAttack <= 0)
@@ -135,7 +129,7 @@ public class knightControls : MonoBehaviour
         }
 
 
-        if (translation > 0)
+        if (x > 0)
         {
             anim.SetBool("isRunning", true);
         }
@@ -147,26 +141,14 @@ public class knightControls : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
         {
             transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-
-            if(Input.GetKey(KeyCode.A))
-            {
-               // LEFT STRAFE
-                transform.position += Vector3.left * w_speed * Time.deltaTime;
-            }
-
-            // RIGHT STRAFE
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.position += Vector3.right * w_speed * Time.deltaTime;
-            }
-
-        }
-        else
-        {
-            transform.Rotate(0, rotation, 0);
         }
 
-        transform.Translate(0, 0, translation);
+        x = Input.GetAxis("Horizontal") * speed;
+        z = Input.GetAxis("Vertical") * speed;
+
+        transform.Translate(x, 0, z);
+        
+
     }
 
 
