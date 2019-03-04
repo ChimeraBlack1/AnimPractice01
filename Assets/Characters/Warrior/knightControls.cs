@@ -12,12 +12,17 @@ public class knightControls : MonoBehaviour
     public float w_speed = 10f;
     public float jumpHeight;
     public float sphereRadius = 5f;
-    private float timeBtwAttack;
-    private float timeBtwAttack4;
+    public float startTimeBtwAttack;
+    public float startTImeBtwAttack3;
+    public float startTimeBtwAttack4;
+    
+
     private float x;
     private float z;
-    public float startTimeBtwAttack;
-    public float startTimeBtwAttack4;
+    private float timeBtwAttack;
+    private float timeBtwAttack3;
+    private float timeBtwAttack4;
+    private float speedTimer;
     
 
     // Layer masks
@@ -54,9 +59,6 @@ public class knightControls : MonoBehaviour
             anim.SetTrigger("isJumping");
         }
 
-        
-
-
         if(timeBtwAttack <= 0)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -90,11 +92,36 @@ public class knightControls : MonoBehaviour
             anim.SetTrigger("Hamstring");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+
+        if (timeBtwAttack3 <= 0)
         {
-            anim.SetTrigger("Sprint");
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                timeBtwAttack3 = startTImeBtwAttack3;
+                speed = 0.2f;
+                speedTimer = 5;
+                anim.SetTrigger("Sprint");
+            }
+
+        }else
+        {
+            timeBtwAttack3 -= Time.deltaTime;
         }
 
+
+        if (speed == 0.2f)
+        {
+            speedTimer -= Time.deltaTime;
+
+            Debug.Log("speed for " + speedTimer + " seconds");
+
+            if(speedTimer <= 0)
+            {
+                speed = 0.1f;
+                speedTimer = 0;
+            }
+        }
 
         if (timeBtwAttack4 <= 0)
         {
@@ -148,9 +175,7 @@ public class knightControls : MonoBehaviour
 
         transform.Translate(x, 0, z);
         
-
     }
-
 
 
 }
