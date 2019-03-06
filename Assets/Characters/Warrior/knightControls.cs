@@ -53,7 +53,6 @@ public class knightControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckIsJumping();
         CheckAbilityOne();
         CheckAbilityTwo();
         CheckAbilityThree();
@@ -73,52 +72,14 @@ public class knightControls : MonoBehaviour
         x = Input.GetAxis("Horizontal") * speed;
         z = Input.GetAxis("Vertical") * speed;
 
-        Debug.Log("x: " + x + " and z: " + z);
-
-        anim.SetFloat("VelY", z*100);
-        anim.SetFloat("VelX", x*100);
+        anim.SetFloat("VelY", z*10);
+        anim.SetFloat("VelX", x*10);
 
         transform.Translate(x, 0, z);
 
         
     }
 
-    private void CheckIfRunning()
-    {
-        if (z > 0)
-        {
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-
-    }
-
-    private void StrafeLeft()
-    {
-        if(x < 0)
-        {
-            anim.SetBool("StrafeLeft", true);
-        }
-        else
-        {
-            anim.SetBool("StrafeLeft", false);
-        }
-    }
-
-    private void StrafeRight()
-    {
-        if (x > 0)
-        {
-            anim.SetBool("StrafeRight", true);
-        }
-        else
-        {
-            anim.SetBool("StrafeRight", false);
-        }
-    }
 
     private void CheckAbilityFour()
     {
@@ -227,13 +188,6 @@ public class knightControls : MonoBehaviour
         }
     }
 
-    private void CheckIsJumping()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            anim.SetTrigger("isJumping");
-        }
-    }
 }
 
 
