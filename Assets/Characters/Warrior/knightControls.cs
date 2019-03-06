@@ -53,76 +53,75 @@ public class knightControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckIsJumping();
+        CheckAbilityOne();
+        CheckAbilityTwo();
+        CheckAbilityThree();
+        CheckAbilityFour();
 
-        if (Input.GetButtonDown("Jump"))
+        Move();
+    }
+
+    private void Move()
+    {
+        if (Input.GetKey(KeyCode.Mouse1))
         {
-            anim.SetTrigger("isJumping");
+            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         }
 
-        if(timeBtwAttack <= 0)
+        // todo think about putting in Time.deltaTime
+        x = Input.GetAxis("Horizontal") * speed;
+        z = Input.GetAxis("Vertical") * speed;
+
+        Debug.Log("x: " + x + " and z: " + z);
+
+        anim.SetFloat("VelY", z*100);
+        anim.SetFloat("VelX", x*100);
+
+        transform.Translate(x, 0, z);
+
+        
+    }
+
+    private void CheckIfRunning()
+    {
+        if (z > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-
-                timeBtwAttack = startTimeBtwAttack;
-                anim.SetTrigger("Cleave");
-
-                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-                foreach (Collider hit in hits)
-                {
-
-                    if (hit.tag == "Enemy")
-                    {
-                        print("hit " + hit.gameObject);
-                        // todo insert logic for reducing hitpoints of enemy
-                    }
-                }
-
-            }
-        }else
-        {
-            timeBtwAttack -= Time.deltaTime;
+            anim.SetBool("isRunning", true);
         }
-       
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            
-            anim.SetTrigger("Hamstring");
+            anim.SetBool("isRunning", false);
         }
 
+    }
 
-        if (timeBtwAttack3 <= 0)
+    private void StrafeLeft()
+    {
+        if(x < 0)
         {
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                timeBtwAttack3 = startTImeBtwAttack3;
-                speed = 0.2f;
-                speedTimer = 5;
-                anim.SetTrigger("Sprint");
-            }
-
-        }else
-        {
-            timeBtwAttack3 -= Time.deltaTime;
+            anim.SetBool("StrafeLeft", true);
         }
-
-
-        if (speed == 0.2f)
+        else
         {
-            speedTimer -= Time.deltaTime;
-
-            Debug.Log("speed for " + speedTimer + " seconds");
-
-            if(speedTimer <= 0)
-            {
-                speed = 0.1f;
-                speedTimer = 0;
-            }
+            anim.SetBool("StrafeLeft", false);
         }
+    }
 
+    private void StrafeRight()
+    {
+        if (x > 0)
+        {
+            anim.SetBool("StrafeRight", true);
+        }
+        else
+        {
+            anim.SetBool("StrafeRight", false);
+        }
+    }
+
+    private void CheckAbilityFour()
+    {
         if (timeBtwAttack4 <= 0)
         {
             if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -144,40 +143,97 @@ public class knightControls : MonoBehaviour
                 }
 
             }
-        }else
-        {
-            timeBtwAttack4 -= Time.deltaTime;
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            anim.SetTrigger("Whirlwind");
-        }
-
-
-        if (x > 0)
-        {
-            anim.SetBool("isRunning", true);
         }
         else
         {
-            anim.SetBool("isRunning", false);
+            timeBtwAttack4 -= Time.deltaTime;
         }
-
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-        }
-
-        x = Input.GetAxis("Horizontal") * speed;
-        z = Input.GetAxis("Vertical") * speed;
-
-        transform.Translate(x, 0, z);
-        
     }
 
+    private void CheckAbilityThree()
+    {
+        if (timeBtwAttack3 <= 0)
+        {
 
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                timeBtwAttack3 = startTImeBtwAttack3;
+                speed = 0.2f;
+                speedTimer = 5;
+                anim.SetTrigger("Sprint");
+            }
+
+        }
+        else
+        {
+            timeBtwAttack3 -= Time.deltaTime;
+        }
+
+        SpeedBoost();
+    }
+
+    private void SpeedBoost()
+    {
+        if (speed == 0.2f)
+        {
+            speedTimer -= Time.deltaTime;
+
+            Debug.Log("speed for " + speedTimer + " seconds");
+
+            if (speedTimer <= 0)
+            {
+                speed = 0.1f;
+                speedTimer = 0;
+            }
+        }
+    }
+
+    private void CheckAbilityTwo()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+
+            anim.SetTrigger("Hamstring");
+        }
+    }
+
+    private void CheckAbilityOne()
+    {
+        if (timeBtwAttack <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+
+                timeBtwAttack = startTimeBtwAttack;
+                anim.SetTrigger("Cleave");
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+                foreach (Collider hit in hits)
+                {
+
+                    if (hit.tag == "Enemy")
+                    {
+                        print("hit " + hit.gameObject);
+                        // todo insert logic for reducing hitpoints of enemy
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            timeBtwAttack -= Time.deltaTime;
+        }
+    }
+
+    private void CheckIsJumping()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            anim.SetTrigger("isJumping");
+        }
+    }
 }
 
 

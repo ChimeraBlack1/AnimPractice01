@@ -152,8 +152,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114033752159999874, guid: 8d402804bf598f647ad8a9b892ae1bc8, type: 2}
+    - target: {fileID: 95822844777919738, guid: 8d402804bf598f647ad8a9b892ae1bc8,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 45f54da120b580e479d9f994edb955e0, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d402804bf598f647ad8a9b892ae1bc8, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &77262661
@@ -428,43 +432,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1207273660599126, guid: 52f7656e5b3d34b4abf01e6c3cc77e89, type: 2}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 114653938478658998, guid: 52f7656e5b3d34b4abf01e6c3cc77e89,
         type: 2}
       propertyPath: target
       value: 
       objectReference: {fileID: 1336327943}
+    - target: {fileID: 1207273660599126, guid: 52f7656e5b3d34b4abf01e6c3cc77e89, type: 2}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52f7656e5b3d34b4abf01e6c3cc77e89, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &2090224073 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1793952948078612, guid: 8d402804bf598f647ad8a9b892ae1bc8,
-    type: 2}
-  m_PrefabInternal: {fileID: 29378350}
---- !u!114 &2090224074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2090224073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d775d4306fa0684da8403216cc55286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
-  isCrouching: 0
-  speed: 0
-  w_speed: 10
-  r_speed: 20
-  c_speed: 0.25
-  MouserotSpeed: 2000
-  rotSpeed: 20
-  jumpHeight: 0
-  sphereRadius: 2
-  startTimeBtwAttack: 0
-  startTimeBtwAttack4: 0
