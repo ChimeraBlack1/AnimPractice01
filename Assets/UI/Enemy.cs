@@ -7,10 +7,13 @@ public class Enemy : MonoBehaviour {
 
 
     public float startHealth = 100f;
+    public Slider m_Slider;
     private float health;
 
-    [Header("Unity Stuff")]
+    [Header("Do not change")]
     public Image healthBar;
+
+    private bool m_dead = true;
 
 	void Start () {
         health = startHealth;
@@ -27,7 +30,7 @@ public class Enemy : MonoBehaviour {
 
         healthBar.fillAmount = health / startHealth;
 
-        if (health <= 0)
+        if (health <= 0 && !m_dead)
         {
             //die 
         }

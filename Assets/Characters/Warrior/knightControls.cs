@@ -13,9 +13,9 @@ public class knightControls : MonoBehaviour
     public float jumpHeight;
     public float sphereRadius = 5f;
     public float startTimeBtwAttack;
+    public float cleaveDamage = 10f;
     public float startTImeBtwAttack3;
     public float startTimeBtwAttack4;
-    
 
     private float x;
     private float z;
@@ -23,6 +23,7 @@ public class knightControls : MonoBehaviour
     private float timeBtwAttack3;
     private float timeBtwAttack4;
     private float speedTimer;
+    private float dmgAmount;
     
 
     // Layer masks
@@ -76,8 +77,6 @@ public class knightControls : MonoBehaviour
         anim.SetFloat("VelX", x*10);
 
         transform.Translate(x, 0, z);
-
-        
     }
 
 
@@ -100,6 +99,7 @@ public class knightControls : MonoBehaviour
                     {
                         print("hit " + hit.gameObject);
                         // todo insert logic for reducing hitpoints of enemy
+                        
                     }
                 }
 
@@ -167,17 +167,20 @@ public class knightControls : MonoBehaviour
 
                 timeBtwAttack = startTimeBtwAttack;
                 anim.SetTrigger("Cleave");
+                dmgAmount = cleaveDamage;
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
 
                 foreach (Collider hit in hits)
                 {
-
                     if (hit.tag == "Enemy")
                     {
                         print("hit " + hit.gameObject);
                         // todo insert logic for reducing hitpoints of enemy
+
+                        Damage(hit.transform);
                     }
+                    
                 }
 
             }
@@ -188,6 +191,20 @@ public class knightControls : MonoBehaviour
         }
     }
 
+    void Damage(Transform enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if (e != null)
+        {
+            e.TakeDamage(dmgAmount);
+        }else
+        {
+            Debug.Log("you're screwed...");
+        }
+
+        
+    }
 }
 
 
