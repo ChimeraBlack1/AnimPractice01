@@ -9,11 +9,11 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	void Start () {
         if (isLocalPlayer)
         {
-            GetComponent<knightControls>().enabled = true;
+            GetComponent<BobControls>().enabled = true;
         }
         else
         {
-            GetComponent<knightControls>().enabled = false;
+            GetComponent<BobControls>().enabled = false;
         }
 
     }

@@ -292,10 +292,10 @@ GameObject:
   - component: {fileID: 95342594776411368}
   - component: {fileID: 54084246330937290}
   - component: {fileID: 136245348267470792}
-  - component: {fileID: 114094833314917260}
   - component: {fileID: 114991064970512350}
   - component: {fileID: 114855859704645928}
-  - component: {fileID: 114103274841172008}
+  - component: {fileID: 114692698803101084}
+  - component: {fileID: 114858188123703492}
   m_Layer: 9
   m_Name: Bob
   m_TagString: Player
@@ -2151,7 +2151,7 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65605282200914026
@@ -2184,7 +2184,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114094833314917260
+--- !u!114 &114692698803101084
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2192,30 +2192,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1243460157101278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d775d4306fa0684da8403216cc55286, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0fc9d9476a6d843b4e6f0fbc4d8881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
   isCrouching: 0
   speed: 0.1
-  w_speed: 10
+  w_speed: 1
   jumpHeight: 0
   sphereRadius: 5
-  startTimeBtwAttack: 1.75
+  startTimeBtwAttack: 0
   cleaveDamage: 10
   startTImeBtwAttack3: 0
   startTimeBtwAttack4: 0
---- !u!114 &114103274841172008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1243460157101278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91dea8152219cc4ebeaf8700241c716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114855859704645928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2227,16 +2216,27 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.07692308
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
-  m_SyncSpin: 0
+  m_SyncSpin: 1
   m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
+  m_VelocityThreshold: 0.001
+  m_SnapThreshold: 15
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 5
+--- !u!114 &114858188123703492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243460157101278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91dea8152219cc4ebeaf8700241c716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114991064970512350
 MonoBehaviour:
   m_ObjectHideFlags: 1
