@@ -10,6 +10,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
         if (isLocalPlayer)
         {
             GetComponent<BobControls>().enabled = true;
+            WowCamera.target = this.gameObject.transform;
         }
         else
         {

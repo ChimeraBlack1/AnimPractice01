@@ -32,6 +32,7 @@ public class BobControls : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
+    Quaternion rotation;
     Rigidbody rb;
     Animator anim;
     CapsuleCollider col_size;
@@ -66,7 +67,7 @@ public class BobControls : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         }
 
         // todo think about putting in Time.deltaTime
@@ -77,7 +78,9 @@ public class BobControls : MonoBehaviour
         anim.SetFloat("VelX", x*10);
 
         Vector3 movement = new Vector3(x, 0, z);
-        rb.MovePosition(transform.position + movement);
+        Debug.Log(movement);
+        rb.MovePosition(rb.position + movement);
+        rb.MoveRotation(rotation);
         //transform.Translate(x, 0, z);
     }
 

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WowCamera : MonoBehaviour
+public class BobCamera : MonoBehaviour
 {
 
-    static public Transform target;
+    public Transform target;
 
     public float targetHeight = 1.7f;
     public float distance = 5.0f;
