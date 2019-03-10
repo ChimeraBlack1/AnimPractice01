@@ -76,12 +76,12 @@ public class BobControls : MonoBehaviour
 
         anim.SetFloat("VelY", z*10);
         anim.SetFloat("VelX", x*10);
-
-        Vector3 movement = new Vector3(x, 0, z);
-        Debug.Log(movement);
-        rb.MovePosition(rb.position + movement);
+        
         rb.MoveRotation(rotation);
-        //transform.Translate(x, 0, z);
+        transform.Translate(x, 0, z);
+
+        //Vector3 movement = new Vector3(x, 0, z);
+        //rb.MovePosition(rb.position + movement);
     }
 
 
