@@ -5,8 +5,46 @@ using UnityEngine.Networking;
 
 public class SetupLocalPlayer : NetworkBehaviour {
 
+
+    Animator anim;
+
+    [SyncVar(hook = "OnChangeAnimation")]
+    public string animState = "idle";
+
+    void OnChangeAnimation (string aS)
+    {
+        if (isLocalPlayer) return;
+        UpdateAnimationState(aS);
+    }
+
+    [Command]
+    public void CmdChangeAnimState(string aS)
+    {
+        UpdateAnimationState(aS);     
+    }
+
+    void UpdateAnimationState(string aS)
+    {
+        if (animState == aS) return;
+        animState = aS;
+        Debug.Log(animState);
+
+        if(animState == "Moving")
+        {
+            //anim.SetFloat("VelY", z * 10);
+            //anim.SetFloat("VelX", x * 10);
+        }else if (animState == "Cleave")
+        {
+            anim.SetTrigger("Cleave");
+        }
+
+    }
+
 	// Use this for initialization
 	void Start () {
+
+        anim = GetComponentInChildren<Animator>();
+
         if (isLocalPlayer)
         {
             GetComponent<BobControls>().enabled = true;

@@ -81,6 +81,7 @@ public class BobControls : MonoBehaviour
         
         transform.Translate(x, 0, z);
 
+        this.gameObject.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Moving");
         //Vector3 movement = new Vector3(x, 0, z);
         //rb.MovePosition(rb.position + movement);
     }
@@ -173,6 +174,7 @@ public class BobControls : MonoBehaviour
 
                 timeBtwAttack = startTimeBtwAttack;
                 anim.SetTrigger("Cleave");
+                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Cleave");
                 dmgAmount = cleaveDamage;
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
