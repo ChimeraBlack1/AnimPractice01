@@ -68,6 +68,7 @@ public class BobControls : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
         {
             rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            rb.MoveRotation(rotation);
         }
 
         // todo think about putting in Time.deltaTime
@@ -77,7 +78,7 @@ public class BobControls : MonoBehaviour
         anim.SetFloat("VelY", z*10);
         anim.SetFloat("VelX", x*10);
         
-        rb.MoveRotation(rotation);
+        
         transform.Translate(x, 0, z);
 
         //Vector3 movement = new Vector3(x, 0, z);
