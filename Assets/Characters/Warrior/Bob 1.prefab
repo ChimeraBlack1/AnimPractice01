@@ -2266,15 +2266,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.04761905
-  m_SyncRotationAxis: 7
+  m_SendInterval: 0.071428575
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 1
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.001
   m_SnapThreshold: 20
-  m_InterpolateRotation: 5
-  m_InterpolateMovement: 2
+  m_InterpolateRotation: 15
+  m_InterpolateMovement: 1
 --- !u!114 &114262057769077720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   isCrouching: 0
-  speed: 0.1
+  speed: 0.08
   w_speed: 1
   jumpHeight: 0
   sphereRadius: 5
@@ -2386,6 +2386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91dea8152219cc4ebeaf8700241c716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.1
+  startTImeBtwAttack3: 0
+  startTimeBtwAttack4: 0
+  sphereRadius: 5
 --- !u!114 &114430915845133432
 MonoBehaviour:
   m_ObjectHideFlags: 1
