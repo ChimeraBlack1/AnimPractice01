@@ -81,7 +81,7 @@ public class BobControls : MonoBehaviour
         
         transform.Translate(x, 0, z);
 
-        this.gameObject.GetComponent<SetupLocalPlayer>().CmdChangeMovement(x, z);
+        //this.gameObject.GetComponent<SetupLocalPlayer>().CmdChangeMovement(x, z);
         //Vector3 movement = new Vector3(x, 0, z);
         //rb.MovePosition(rb.position + movement);
     }
@@ -95,7 +95,7 @@ public class BobControls : MonoBehaviour
             {
 
                 timeBtwAttack4 = startTimeBtwAttack4;
-                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
+                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
                 anim.SetTrigger("Whirlwind");                
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
@@ -129,7 +129,7 @@ public class BobControls : MonoBehaviour
                 timeBtwAttack3 = startTImeBtwAttack3;
                 speed = 0.2f;
                 speedTimer = 5;
-                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
+                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
                 anim.SetTrigger("Sprint");
             }
 
@@ -164,7 +164,7 @@ public class BobControls : MonoBehaviour
         {
 
             anim.SetTrigger("Hamstring");
-            this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Hamstring");
+            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Hamstring");
         }
     }
 
@@ -177,7 +177,7 @@ public class BobControls : MonoBehaviour
 
                 timeBtwAttack = startTimeBtwAttack;
                 anim.SetTrigger("Cleave");
-                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Cleave");
+                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Cleave");
                 dmgAmount = cleaveDamage;
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);

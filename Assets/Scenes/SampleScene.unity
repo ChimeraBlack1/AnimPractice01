@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 438047225}
   - component: {fileID: 438047224}
   - component: {fileID: 438047223}
+  - component: {fileID: 438047227}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -258,7 +259,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1243460157101278, guid: 0337c329e45554746abaa442ac6dc4d4,
+  m_PlayerPrefab: {fileID: 1618463999726664, guid: 068d81da2d802014e89d61309e333a7f,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
@@ -334,6 +335,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &438047227
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 438047222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &486433266
 Prefab:
   m_ObjectHideFlags: 0
