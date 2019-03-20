@@ -95,7 +95,8 @@ public class BobControls : MonoBehaviour
             {
 
                 timeBtwAttack4 = startTimeBtwAttack4;
-                anim.SetTrigger("Whirlwind");
+                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
+                anim.SetTrigger("Whirlwind");                
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
 
@@ -128,6 +129,7 @@ public class BobControls : MonoBehaviour
                 timeBtwAttack3 = startTImeBtwAttack3;
                 speed = 0.2f;
                 speedTimer = 5;
+                this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
                 anim.SetTrigger("Sprint");
             }
 
@@ -162,6 +164,7 @@ public class BobControls : MonoBehaviour
         {
 
             anim.SetTrigger("Hamstring");
+            this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Hamstring");
         }
     }
 
@@ -208,7 +211,7 @@ public class BobControls : MonoBehaviour
             e.TakeDamage(dmgAmount);
         }else
         {
-            Debug.Log("you're screwed...");
+            Debug.Log("Error taking damage.");
         }
 
         

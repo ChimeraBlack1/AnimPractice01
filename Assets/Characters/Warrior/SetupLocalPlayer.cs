@@ -36,6 +36,15 @@ public class SetupLocalPlayer : NetworkBehaviour {
         }else if (animState == "Cleave")
         {
             anim.SetTrigger("Cleave");
+        }else if (animState == "Whirlwind")
+        {
+            anim.SetTrigger("Whirlwind");
+        }else if (animState == "Sprint")
+        {
+            anim.SetTrigger("Sprint");
+        }else if(animState == "Hamstring")
+        {
+            anim.SetTrigger("Hamstring");
         }
 
     }
