@@ -81,7 +81,7 @@ public class BobControls : MonoBehaviour
         
         transform.Translate(x, 0, z);
 
-        this.gameObject.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Moving");
+        this.gameObject.GetComponent<SetupLocalPlayer>().CmdChangeMovement(x, z);
         //Vector3 movement = new Vector3(x, 0, z);
         //rb.MovePosition(rb.position + movement);
     }

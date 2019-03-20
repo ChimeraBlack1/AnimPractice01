@@ -11,10 +11,28 @@ public class SetupLocalPlayer : NetworkBehaviour {
     [SyncVar(hook = "OnChangeAnimation")]
     public string animState = "idle";
 
+    //SyncListFloat direction = new SyncListFloat();
+
+    [SyncVar(hook = "OnChangeEx")]
+    public float x;
+
+    [SyncVar(hook ="OnChangeZed")]
+    public float z;
+
     void OnChangeAnimation (string aS)
     {
         if (isLocalPlayer) return;
         UpdateAnimationState(aS);
+    }
+
+    void OnChangeEx (float x)
+    {
+        anim.SetFloat("VelX", x *10);
+    }
+
+    void OnChangeZed(float z)
+    {
+        anim.SetFloat("VelY", z * 10);
     }
 
     [Command]
@@ -23,17 +41,31 @@ public class SetupLocalPlayer : NetworkBehaviour {
         UpdateAnimationState(aS);     
     }
 
+    [Command]
+    public void CmdChangeMovement(float newX, float newZ)
+    {
+        UpdateMovement(newX, newZ);
+    }
+
+    void UpdateMovement(float newX, float newZ)
+    {
+        //if (x == newX && z == newZ) return;
+        x = newX;
+        z = newZ;
+
+        anim.SetFloat("VelY", newZ * 10);
+        anim.SetFloat("VelX", newX * 10);
+    }
+
+
+
     void UpdateAnimationState(string aS)
     {
         if (animState == aS) return;
         animState = aS;
         Debug.Log(animState);
 
-        if(animState == "Moving")
-        {
-            //anim.SetFloat("VelY", z * 10);
-            //anim.SetFloat("VelX", x * 10);
-        }else if (animState == "Cleave")
+        if (animState == "Cleave")
         {
             anim.SetTrigger("Cleave");
         }else if (animState == "Whirlwind")
