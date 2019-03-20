@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BobControls : MonoBehaviour
 {
+    Quaternion rotation;
+    Rigidbody rb;
+    Animator anim;
+    CapsuleCollider col_size;
 
     public bool isGrounded;
     public bool isCrouching;
@@ -24,7 +28,6 @@ public class BobControls : MonoBehaviour
     private float timeBtwAttack4;
     private float speedTimer;
     private float dmgAmount;
-    
 
     // Layer masks
     int ignoreEnemy = 1 << 13;
@@ -32,17 +35,12 @@ public class BobControls : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
-    Quaternion rotation;
-    Rigidbody rb;
-    Animator anim;
-    CapsuleCollider col_size;
-
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        col_size = GetComponent<CapsuleCollider>();
+        col_size = GetComponent<CapsuleCollider>(); // for crouching
         isGrounded = true;
     }
 
@@ -55,10 +53,10 @@ public class BobControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckAbilityOne();
-        CheckAbilityTwo();
-        CheckAbilityThree();
-        CheckAbilityFour();
+        //CheckAbilityOne();
+        //CheckAbilityTwo();
+        //CheckAbilityThree();
+        //CheckAbilityFour();
 
         Move();
     }
