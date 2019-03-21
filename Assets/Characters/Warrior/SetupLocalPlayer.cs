@@ -8,12 +8,16 @@ public class SetupLocalPlayer : NetworkBehaviour {
     Quaternion rotation;
     Rigidbody rb;
     NetworkAnimator anim;
-    Animator animator;
 
     public float speed = 0.1f;
+    public float startTimeBtwAttack;
     public float startTImeBtwAttack3;
     public float startTimeBtwAttack4;
     public float sphereRadius = 5f;
+    public float cleaveDamage = 10f;
+    public float whirlwindDamage = 20f;
+    public float hamstringDamage = 5f;
+    private float dmgAmount;
 
 
     private float timeBtwAttack;
@@ -43,35 +47,32 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	void Update () {
         CheckAbilityOne();
         CheckAbilityTwo();
-        CheckAbilityThree();
         CheckAbilityFour();
     }
 
     
     private void CheckAbilityOne()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (timeBtwAttack <= 0)
         {
-            anim.SetTrigger("Cleave");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            timeBtwAttack4 = startTimeBtwAttack4;
-            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
-            anim.SetTrigger("Whirlwind");
-
-            Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-            foreach (Collider hit in hits)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                if (hit.tag == "Enemy")
+                timeBtwAttack = startTimeBtwAttack;
+                anim.SetTrigger("Cleave");
+                dmgAmount = cleaveDamage;
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+                foreach (Collider hit in hits)
                 {
-                    print("hit " + hit.gameObject);
-                    // todo insert logic for reducing hitpoints of enemy
+                    if (hit.tag == "Player" && !isLocalPlayer)
+                    {
+                        print("hit " + hit.gameObject);
+                        Damage(hit.transform);
+                    }
                 }
             }
-        }
+        }     
     }
 
     private void CheckAbilityTwo()
@@ -82,44 +83,6 @@ public class SetupLocalPlayer : NetworkBehaviour {
         }
     }
 
-    private void CheckAbilityThree()
-    {
-        if (timeBtwAttack3 <= 0)
-        {
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                timeBtwAttack3 = startTImeBtwAttack3;
-                speed = 0.2f;
-                speedTimer = 5;
-                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
-                anim.SetTrigger("Sprint");
-            }
-
-        }
-        else
-        {
-            timeBtwAttack3 -= Time.deltaTime;
-        }
-
-        SpeedBoost();
-    }
-
-    private void SpeedBoost()
-    {
-        if (speed == 0.2f)
-        {
-            speedTimer -= Time.deltaTime;
-
-            Debug.Log("speed for " + speedTimer + " seconds");
-
-            if (speedTimer <= 0)
-            {
-                speed = 0.1f;
-                speedTimer = 0;
-            }
-        }
-    }
 
     private void CheckAbilityFour()
     {
@@ -129,19 +92,19 @@ public class SetupLocalPlayer : NetworkBehaviour {
             {
 
                 timeBtwAttack4 = startTimeBtwAttack4;
-                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
                 anim.SetTrigger("Whirlwind");
+                dmgAmount = whirlwindDamage;
+
 
                 Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
 
                 foreach (Collider hit in hits)
                 {
 
-                    if (hit.tag == "Enemy")
+                    if (hit.tag == "Player")
                     {
                         print("hit " + hit.gameObject);
-                        // todo insert logic for reducing hitpoints of enemy
-
+                        Damage(hit.transform);
                     }
                 }
 
@@ -153,8 +116,62 @@ public class SetupLocalPlayer : NetworkBehaviour {
         }
     }
 
+    void Damage(Transform enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if (e != null)
+        {
+            e.TakeDamage(dmgAmount);
+        }
+        else
+        {
+            Debug.Log("Error taking damage.");
+        }
+
+
+    }
+
+
 
 }
+
+// HEALTHBAR STUFF -- START
+
+//[Command]
+//public void CmdAddPumpkin()
+//{
+//    NetworkManager.singleton.GetComponent<NetworkManager>().AddObject(5, this.transform);
+//}
+
+//void OnGUI()
+//{
+//    if (isLocalPlayer)
+//    {
+//        if (Event.current.Equals(Event.KeyboardEvent("0")) ||
+//            Event.current.Equals(Event.KeyboardEvent("1")) ||
+//            Event.current.Equals(Event.KeyboardEvent("2")) ||
+//            Event.current.Equals(Event.KeyboardEvent("3")))
+//        {
+//            int charid = int.Parse(Event.current.keyCode.ToString().Substring(5)) + 1;
+//            NetworkConnection conn = this.connectionToClient;
+//            NetworkManager.singleton.GetComponent<CustomNetworkManager>().ChangeCharacters(conn, charid, this.transform);
+//            Destroy(this.gameObject);
+//        }
+//        //-----NEW CODE BELOW TO USE 9 KEY TO CREATE A PUMPKIN -----
+//        else if (Event.current.Equals(Event.KeyboardEvent("9")))
+//        {
+//            NetworkConnection conn = this.connectionToClient;
+//            CmdAddPumpkin();
+//        }
+//        //-----NEW CODE ABOVE------------
+//    }
+//}
+
+
+
+// HEALTHBAR STUFF  -- END
+
 
 
 
@@ -233,7 +250,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
 
 
-    //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 
 

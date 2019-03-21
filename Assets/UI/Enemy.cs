@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Enemy : MonoBehaviour {
-
-
+public class Enemy : NetworkBehaviour
+{
     public float startHealth = 100f;
-    public Slider m_Slider;
-    private float health;
+    //public Slider m_Slider;
+
+    [SyncVar (hook = "OnChangeHealth")]
+    float currentHealth;
 
     [Header("Do not change")]
     public Image healthBar;
@@ -16,24 +18,30 @@ public class Enemy : MonoBehaviour {
     private bool m_dead = true;
 
 	void Start () {
-        health = startHealth;
+        currentHealth = startHealth;
 	}
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
+        if (isLocalPlayer)
+        {
+            return;
+        }
+        Debug.Log("taking damage");
+        currentHealth -= amount;
 
-        healthBar.fillAmount = health / startHealth;
+        
 
-        if (health <= 0 && !m_dead)
+        if (currentHealth <= 0 && !m_dead)
         {
             //die 
         }
+    }
+
+    void OnChangeHealth(float health)
+    {
+        healthBar.fillAmount = health / startHealth;
     }
 
 }

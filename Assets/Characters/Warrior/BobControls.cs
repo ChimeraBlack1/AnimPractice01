@@ -12,7 +12,8 @@ public class BobControls : MonoBehaviour
     public bool isGrounded;
     public bool isCrouching;
 
-    public float speed = 0.1f;
+    public float speed = 0.08f;
+    
     public float w_speed = 10f;
     public float jumpHeight;
     public float sphereRadius = 5f;
@@ -28,7 +29,7 @@ public class BobControls : MonoBehaviour
     private float timeBtwAttack4;
     private float speedTimer;
     private float dmgAmount;
-
+    
     // Layer masks
     int ignoreEnemy = 1 << 13;
 
@@ -53,11 +54,7 @@ public class BobControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //CheckAbilityOne();
-        //CheckAbilityTwo();
-        //CheckAbilityThree();
-        //CheckAbilityFour();
-
+        CheckAbilityThree();
         Move();
     }
 
@@ -84,39 +81,6 @@ public class BobControls : MonoBehaviour
         //rb.MovePosition(rb.position + movement);
     }
 
-
-    private void CheckAbilityFour()
-    {
-        if (timeBtwAttack4 <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-
-                timeBtwAttack4 = startTimeBtwAttack4;
-                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
-                anim.SetTrigger("Whirlwind");                
-
-                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-                foreach (Collider hit in hits)
-                {
-
-                    if (hit.tag == "Enemy")
-                    {
-                        print("hit " + hit.gameObject);
-                        // todo insert logic for reducing hitpoints of enemy
-                        
-                    }
-                }
-
-            }
-        }
-        else
-        {
-            timeBtwAttack4 -= Time.deltaTime;
-        }
-    }
-
     private void CheckAbilityThree()
     {
         if (timeBtwAttack3 <= 0)
@@ -125,9 +89,8 @@ public class BobControls : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 timeBtwAttack3 = startTImeBtwAttack3;
-                speed = 0.2f;
+                speed = 0.16f;
                 speedTimer = 5;
-                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
                 anim.SetTrigger("Sprint");
             }
 
@@ -142,7 +105,8 @@ public class BobControls : MonoBehaviour
 
     private void SpeedBoost()
     {
-        if (speed == 0.2f)
+
+        if (speed == 0.16f)
         {
             speedTimer -= Time.deltaTime;
 
@@ -150,55 +114,12 @@ public class BobControls : MonoBehaviour
 
             if (speedTimer <= 0)
             {
-                speed = 0.1f;
+                speed = 0.08f;
                 speedTimer = 0;
             }
         }
     }
 
-    private void CheckAbilityTwo()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-
-            anim.SetTrigger("Hamstring");
-            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Hamstring");
-        }
-    }
-
-    private void CheckAbilityOne()
-    {
-        if (timeBtwAttack <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-
-                timeBtwAttack = startTimeBtwAttack;
-                anim.SetTrigger("Cleave");
-                //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Cleave");
-                dmgAmount = cleaveDamage;
-
-                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-                foreach (Collider hit in hits)
-                {
-                    if (hit.tag == "Enemy")
-                    {
-                        print("hit " + hit.gameObject);
-                        // todo insert logic for reducing hitpoints of enemy
-
-                        Damage(hit.transform);
-                    }
-                    
-                }
-
-            }
-        }
-        else
-        {
-            timeBtwAttack -= Time.deltaTime;
-        }
-    }
 
     void Damage(Transform enemy)
     {
@@ -220,3 +141,118 @@ public class BobControls : MonoBehaviour
 
 
 
+
+//private void CheckAbilityFour()
+//{
+//    if (timeBtwAttack4 <= 0)
+//    {
+//        if (Input.GetKeyDown(KeyCode.Alpha4))
+//        {
+
+//            timeBtwAttack4 = startTimeBtwAttack4;
+//            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Whirlwind");
+//            anim.SetTrigger("Whirlwind");                
+
+//            Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+//            foreach (Collider hit in hits)
+//            {
+
+//                if (hit.tag == "Enemy")
+//                {
+//                    print("hit " + hit.gameObject);
+//                    // todo insert logic for reducing hitpoints of enemy
+
+//                }
+//            }
+
+//        }
+//    }
+//    else
+//    {
+//        timeBtwAttack4 -= Time.deltaTime;
+//    }
+//}
+
+//private void CheckAbilityThree()
+//{
+//    if (timeBtwAttack3 <= 0)
+//    {
+
+//        if (Input.GetKeyDown(KeyCode.Alpha3))
+//        {
+//            timeBtwAttack3 = startTImeBtwAttack3;
+//            speed = 0.2f;
+//            speedTimer = 5;
+//            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Sprint");
+//            anim.SetTrigger("Sprint");
+//        }
+
+//    }
+//    else
+//    {
+//        timeBtwAttack3 -= Time.deltaTime;
+//    }
+
+//    SpeedBoost();
+//}
+
+//private void SpeedBoost()
+//{
+//    if (speed == 0.2f)
+//    {
+//        speedTimer -= Time.deltaTime;
+
+//        Debug.Log("speed for " + speedTimer + " seconds");
+
+//        if (speedTimer <= 0)
+//        {
+//            speed = 0.1f;
+//            speedTimer = 0;
+//        }
+//    }
+//}
+
+//private void CheckAbilityTwo()
+//{
+//    if (Input.GetKeyDown(KeyCode.Alpha2))
+//    {
+
+//        anim.SetTrigger("Hamstring");
+//        //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Hamstring");
+//    }
+//}
+
+//private void CheckAbilityOne()
+//{
+//    if (timeBtwAttack <= 0)
+//    {
+//        if (Input.GetKeyDown(KeyCode.Alpha1))
+//        {
+
+//            timeBtwAttack = startTimeBtwAttack;
+//            anim.SetTrigger("Cleave");
+//            //this.GetComponent<SetupLocalPlayer>().CmdChangeAnimState("Cleave");
+//            dmgAmount = cleaveDamage;
+
+//            Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+//            foreach (Collider hit in hits)
+//            {
+//                if (hit.tag == "Enemy")
+//                {
+//                    print("hit " + hit.gameObject);
+//                    // todo insert logic for reducing hitpoints of enemy
+
+//                    Damage(hit.transform);
+//                }
+
+//            }
+
+//        }
+//    }
+//    else
+//    {
+//        timeBtwAttack -= Time.deltaTime;
+//    }
+//}

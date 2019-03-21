@@ -2252,7 +2252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 100
-  m_Slider: {fileID: 0}
   healthBar: {fileID: 114430915845133432}
 --- !u!114 &114234492161206290
 MonoBehaviour:
@@ -2266,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.071428575
+  m_SendInterval: 0.037037037
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 1
@@ -2274,7 +2273,7 @@ MonoBehaviour:
   m_VelocityThreshold: 0.001
   m_SnapThreshold: 20
   m_InterpolateRotation: 15
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 0.25
 --- !u!114 &114262057769077720
 MonoBehaviour:
   m_ObjectHideFlags: 1
