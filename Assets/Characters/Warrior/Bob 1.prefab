@@ -574,22 +574,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1534621518748890
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4173275623223222}
-  - component: {fileID: 65808481455314848}
-  m_Layer: 2
-  m_Name: SwordCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1537289103889590
 GameObject:
   m_ObjectHideFlags: 1
@@ -1202,7 +1186,6 @@ Transform:
   - {fileID: 4296632054117964}
   - {fileID: 4806208810843294}
   - {fileID: 4577254504506596}
-  - {fileID: 4173275623223222}
   m_Father: {fileID: 4430496625863090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1389,19 +1372,6 @@ Transform:
   m_Father: {fileID: 4891195032104424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4173275623223222
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1534621518748890}
-  m_LocalRotation: {x: 0.7142173, y: 0.30892673, z: 0.24618226, w: 0.57779944}
-  m_LocalPosition: {x: 0.1884959, y: -0.098194055, z: 0.5803266}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4037115592578502}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 46.647003, y: 0, z: 0}
 --- !u!4 &4186889384735264
 Transform:
   m_ObjectHideFlags: 1
@@ -2210,18 +2180,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65808481455314848
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1534621518748890}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.12523401, y: 1, z: 0.47533298}
-  m_Center: {x: -0, y: 0, z: 0}
 --- !u!95 &95828999397082692
 Animator:
   serializedVersion: 3
@@ -2386,9 +2344,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+  startTimeBtwAttack: 0
   startTImeBtwAttack3: 0
   startTimeBtwAttack4: 0
   sphereRadius: 5
+  cleaveDamage: 10
+  whirlwindDamage: 20
+  hamstringDamage: 5
 --- !u!114 &114430915845133432
 MonoBehaviour:
   m_ObjectHideFlags: 1

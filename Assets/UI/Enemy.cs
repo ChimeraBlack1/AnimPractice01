@@ -6,36 +6,39 @@ using UnityEngine.Networking;
 
 public class Enemy : NetworkBehaviour
 {
+    NetworkAnimator netAnim;
+
     public float startHealth = 100f;
     //public Slider m_Slider;
 
     [SyncVar (hook = "OnChangeHealth")]
-    float currentHealth;
+    public float currentHealth;
 
     [Header("Do not change")]
     public Image healthBar;
 
-    private bool m_dead = true;
-
 	void Start () {
         currentHealth = startHealth;
-	}
+        netAnim = GetComponent<NetworkAnimator>();
+    }
 
 
     public void TakeDamage(float amount)
     {
-        if (isLocalPlayer)
-        {
-            return;
-        }
-        Debug.Log("taking damage");
-        currentHealth -= amount;
-
+        //if (isLocalPlayer)
+        //{
+        //    return;
+        //}
         
+        currentHealth -= amount;
+        healthBar.fillAmount = currentHealth / startHealth;
+       
+        //this.gameObject.GetComponent<SetupLocalPlayer>().CmdUpdateHealth(currentHealth);
 
-        if (currentHealth <= 0 && !m_dead)
+        if (currentHealth <= 0)
         {
-            //die 
+            Debug.Log("health is " + currentHealth + "You should be dead now");
+            netAnim.SetTrigger("Death");
         }
     }
 
@@ -44,4 +47,48 @@ public class Enemy : NetworkBehaviour
         healthBar.fillAmount = health / startHealth;
     }
 
+
+
+
 }
+
+
+//[SyncVar(hook = "OnChangeAnimation")]
+//public string animState = "idle";
+
+//void OnChangeAnimation (string aS)
+//{
+//    if (isLocalPlayer) return;
+//    UpdateAnimationState(aS);
+//}
+
+//[Command]
+//public void CmdChangeMovement(float newX, float newZ)
+//{
+//    UpdateMovement(newX, newZ);
+//}
+
+
+
+
+//void UpdateAnimationState(string aS)
+//{
+//    if (animState == aS) return;
+//    animState = aS;
+//    Debug.Log(animState);
+
+//    if (animState == "Cleave")
+//    {
+//        anim.SetTrigger("Cleave");
+//    }else if (animState == "Whirlwind")
+//    {
+//        anim.SetTrigger("Whirlwind");
+//    }else if (animState == "Sprint")
+//    {
+//        anim.SetTrigger("Sprint");
+//    }else if(animState == "Hamstring")
+//    {
+//        anim.SetTrigger("Hamstring");
+//    }
+
+//}

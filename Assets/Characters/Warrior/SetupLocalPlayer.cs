@@ -10,15 +10,16 @@ public class SetupLocalPlayer : NetworkBehaviour {
     NetworkAnimator anim;
 
     public float speed = 0.1f;
-    public float startTimeBtwAttack;
+    public float startTimeBtwAttack = 2;
     public float startTImeBtwAttack3;
     public float startTimeBtwAttack4;
     public float sphereRadius = 5f;
     public float cleaveDamage = 10f;
     public float whirlwindDamage = 20f;
     public float hamstringDamage = 5f;
-    private float dmgAmount;
 
+    [SyncVar]
+    private float dmgAmount;
 
     private float timeBtwAttack;
     private float timeBtwAttack3;
@@ -45,76 +46,54 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        CheckAbilityOne();
-        CheckAbilityTwo();
-        CheckAbilityFour();
+
+        Attack();
+        //CheckAbilityOne();
+        //CheckAbilityTwo();
+        //CheckAbilityFour();
     }
 
-    
-    private void CheckAbilityOne()
+    //[Command]
+    //public void CmdUpdateHealth(float health)
+    //{
+    //    UpdateHealth(health);
+    //}
+
+
+    [Command]
+    public void CmdAttack()
     {
-        if (timeBtwAttack <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            timeBtwAttack = startTimeBtwAttack;
+            dmgAmount = cleaveDamage;
+
+            GameObject thePlayer;
+            thePlayer = this.gameObject;
+
+            Debug.Log(thePlayer);
+
+            Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+            foreach (Collider hit in hits)
             {
-                timeBtwAttack = startTimeBtwAttack;
-                anim.SetTrigger("Cleave");
-                dmgAmount = cleaveDamage;
-
-                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-                foreach (Collider hit in hits)
-                {
-                    if (hit.tag == "Player" && !isLocalPlayer)
+                    Debug.Log(hit.name);
+                    if (hit.tag == "Player" && hit.gameObject != thePlayer)
                     {
-                        print("hit " + hit.gameObject);
+                        print("hit " + hit.gameObject);   // <-----------------
                         Damage(hit.transform);
                     }
-                }
             }
-        }     
     }
 
-    private void CheckAbilityTwo()
+
+    void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            anim.SetTrigger("Hamstring");
+            anim.SetTrigger("Cleave");
+            CmdAttack();
         }
     }
 
-
-    private void CheckAbilityFour()
-    {
-        if (timeBtwAttack4 <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-
-                timeBtwAttack4 = startTimeBtwAttack4;
-                anim.SetTrigger("Whirlwind");
-                dmgAmount = whirlwindDamage;
-
-
-                Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
-
-                foreach (Collider hit in hits)
-                {
-
-                    if (hit.tag == "Player")
-                    {
-                        print("hit " + hit.gameObject);
-                        Damage(hit.transform);
-                    }
-                }
-
-            }
-        }
-        else
-        {
-            timeBtwAttack4 -= Time.deltaTime;
-        }
-    }
 
     void Damage(Transform enemy)
     {
@@ -131,6 +110,84 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
 
     }
+
+    void UpdateHealth(float hp)
+    {
+        Debug.Log("hersky fersky new hp " + hp);
+    }
+
+    //private void CheckAbilityOne() 
+    //{
+    //    if (timeBtwAttack <= 0)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Alpha1))
+    //        {
+    //            timeBtwAttack = startTimeBtwAttack;
+    //            anim.SetTrigger("Cleave");
+    //            dmgAmount = cleaveDamage;
+
+    //            Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+                
+
+    //            foreach (Collider hit in hits)
+    //            {
+    //                if (!isLocalPlayer)
+    //                {
+    //                    Debug.Log(hit.name);
+    //                    if (hit.tag == "Player")
+    //                    {
+    //                        print("hit " + hit.gameObject);   // <-----------------
+    //                        Damage(hit.transform);
+    //                    }
+    //                }
+                    
+    //            }
+    //        }
+    //    }     
+    //}
+
+    private void CheckAbilityTwo()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            anim.SetTrigger("Hamstring");
+        }
+    }
+
+
+    private void CheckAbilityFour()
+    {
+        //if (timeBtwAttack4 <= 0)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    {
+
+        //        timeBtwAttack4 = startTimeBtwAttack4;
+        //        anim.SetTrigger("Whirlwind");
+        //        dmgAmount = whirlwindDamage;
+
+        //        Collider[] hits = Physics.OverlapSphere(transform.position, sphereRadius);
+                
+        //        foreach (Collider hit in hits)
+        //        {
+                    
+        //            if (hit.tag == "Player")
+        //            {
+        //                print("hit " + hit.gameObject);
+        //                Damage(hit.transform);
+        //            }
+        //        }
+
+        //    }
+        //}
+        //else
+        //{
+        //    timeBtwAttack4 -= Time.deltaTime;
+        //}
+    }
+
+
+
 
 
 
